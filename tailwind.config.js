@@ -8,36 +8,20 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: {
-          DEFAULT: "#1D4ED8", // Main primary color
-          light: "white", // Lighter shade
-          dark: "grey", // Darker shade
-        },
-        secondary: {
-          DEFAULT: "#9333EA", // Secondary color
-          light: "#A855F7", 
-          dark: "#7E22CE", 
-        },
-        accent: {
-          DEFAULT: "#F59E0B", // Accent color
-          light: "#FBBF24", 
-          dark: "#B45309", 
-        },
-        neutral: {
-          light: "#F3F4F6", // Light background
-          DEFAULT: "#D1D5DB", // Neutral default
-          dark: "#374151", // Dark text or elements
-        },
-        danger: "#EF4444", // Danger (e.g., error messages)
-        success: "#22C55E", // Success (e.g., success messages)
-        warning: "#FACC15", // Warning
+        primary: "rgba(244, 244, 244, 1)", // white background
+        secondary: "rgba(0, 0, 0, 1)", // black 
+        tertiary: "#6b7280", // grey-500 
+        textColor: "rgba(255, 255, 255, 1)", // white color for text
+        whiteButton: "rgba(255, 255, 255, 1)", // dashboard button color
+        footer: "rgba(42, 42, 42, 1)", // dashboard button color
+       
+       
       },
       fontFamily: {
-        sans: ["Inter", "ui-sans-serif", "system-ui"], // Default sans-serif
-        serif: ["Merriweather", "ui-serif", "Georgia"], // Default serif
-        mono: ["Fira Code", "ui-monospace", "SFMono-Regular"], // Default monospace
-        display: ["Poppins", "sans-serif"], // For headings and display text
-        body: ["Roboto", "sans-serif"], // For body text
+        neueMontreal: ['"Neue Montreal"', 'sans-serif'],
+        recklessNeue: ['"Reckless Neue"', 'sans-serif'],
+        sans: ['var(--font-inter)', 'sans-serif'],
+        poppins: ['var(--font-poppins)', 'sans-serif'],
       }
     },
   },
