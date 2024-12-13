@@ -7,15 +7,22 @@ module.exports = {
   ],
   theme: {
     extend: {
-      keyframes: {
-        rotateY: {
-          '0%': { transform: 'rotateY(0deg)' },
-          '100%': { transform: 'rotateY(360deg)' },
-        },
+      colors: {
+        primary: "rgba(244, 244, 244, 1)", // white background
+        secondary: "rgba(0, 0, 0, 1)", // black 
+        tertiary: "#6b7280", // grey-500 
+        textColor: "rgba(255, 255, 255, 1)", // white color for text
+        whiteButton: "rgba(255, 255, 255, 1)", // dashboard button color
+        footer: "rgba(42, 42, 42, 1)", // dashboard button color
+       
+       
       },
-      animation: {
-        'spin-y': 'rotateY 5s linear infinite',
-      },
+      fontFamily: {
+        neueMontreal: ['"Neue Montreal"', 'sans-serif'],
+        recklessNeue: ['"Reckless Neue"', 'sans-serif'],
+        sans: ['var(--font-inter)', 'sans-serif'],
+        poppins: ['var(--font-poppins)', 'sans-serif'],
+      }
     },
   },
   plugins: [],

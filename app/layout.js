@@ -1,5 +1,10 @@
-
+// app/layout.js
+import { Inter, Poppins } from 'next/font/google';
 import "./globals.css";
+
+// Importing Inter and Poppins fonts using next/font
+const inter = Inter({ subsets: ['latin'], weight: ['400', '500', '600'] });
+const poppins = Poppins({ subsets: ['latin'], weight: ['100', '300', '400', '500', '700'] });
 
 export const metadata = {
   title: "Create Next App",
@@ -9,7 +14,18 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <head>
+        {/* Inject font styles into the head */}
+        <style>{`
+          :root {
+            --font-inter: ${inter.style.fontFamily};
+            --font-poppins: ${poppins.style.fontFamily};
+          }
+        `}</style>
+      </head>
+      <body className={`${inter.className} font-sans`}>
+        {children}
+      </body>
     </html>
   );
 }
