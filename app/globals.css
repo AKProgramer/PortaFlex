@@ -4,17 +4,11 @@
 *{
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 body{
   background-color: bisque;
   width: 100%;
   height: 100vh;
 }
-@keyframes rotateY {
-  from {
-    transform: rotateY(0deg);
-  }
-  to {
-    transform: rotateY(360deg);
-  }
-}
+ 
