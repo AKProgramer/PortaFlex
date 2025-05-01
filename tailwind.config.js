@@ -18,8 +18,8 @@ module.exports = {
        
       },
       fontFamily: {
-        neueMontreal: ['"Neue Montreal"', 'sans-serif'],
-        recklessNeue: ['"Reckless Neue"', 'sans-serif'],
+        neueMontreal: ['var(--font-neue-montreal)', 'sans-serif'],
+        recklessNeue: ['var(--font-reckless-neue)', 'sans-serif'],
         sans: ['var(--font-inter)', 'sans-serif'],
         poppins: ['var(--font-poppins)', 'sans-serif'],
       }
