@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { GoArrowDownRight } from "react-icons/go";
+import Link from "next/link";
 
 const templates = [
   { id: 1, title: "Template 1", image: "/images/download.png" },
@@ -28,18 +29,27 @@ export default function TemplateSection() {
 
             {/* Image Wrapper */}
             <div className="relative group">
-              <img
-                src={`${template.image}`}
-                alt={template.title}
-                className="w-full rounded-md"
-              />
+                <img
+                  src={`${template.image}`}
+                  alt={template.title}
+                  className="w-full rounded-md"
+                />
 
-              {/* Hover Effect - Buttons (Only on Image) */}
-              <div className="absolute inset-0 mb-1  bg-black/40 flex flex-col items-center justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-recklessNeue">
-                <button className="bg-white text-black px-4 py-2 rounded-xl shadow-lg hover:underline">
-                Edit Template
-                </button>
-              </div>
+                {/* Hover Effect - Buttons (Only on Image) */}
+                <div className="absolute inset-0 mb-1  bg-black/40 flex flex-col items-center justify-end gap-5 pb-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ">
+                  <Link 
+                  href={`/templates/${template.id}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                   className="bg-white text-black px-4 py-2 rounded-xl shadow-lg hover:underline">
+                    View
+                  </Link>
+                  <Link 
+                   href={`/templates/${template.id}/edit`}
+                  className="bg-white text-black px-4 py-2 rounded-xl shadow-lg hover:underline">
+                  Use Template
+                  </Link>
+                </div>
             </div>
           </div>
         ))}
