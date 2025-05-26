@@ -6,8 +6,8 @@ export default function Navbar() {
     <header className="bg-secondary text-textColor rounded-xl mt-4 ml-4 mr-4 shadow-md">
         <div className="flex justify-between items-center px-6 py-3">
           <div className="text-xl font-recklessNeue flex items-center gap-3">
-          <div class="w-[57px] h-[3.33rem] overflow-hidden">
-          <img src="/images/PortaLogo.png" alt="logo" class="object-cover object-left w-full h-full" />
+          <div className="w-[57px] h-[3.33rem] overflow-hidden">
+          <img src="/images/PortaLogo.png" alt="logo" className="object-cover object-left w-full h-full" />
         </div>
             <Link href="/" className='font-light text-3xl'>PortaFlex</Link>
           </div>

@@ -1,22 +1,7 @@
 @tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities;  
 
-/* Font Face Definitions */
-@font-face {
-  font-family: 'Neue Montreal';
-  src: url('/fonts/NeueMontreal/NeueMontreal-Light.otf') format('opentype'); /* Correct format for .otf */
-  font-weight: 300; /* Light weight */
-  font-style: normal;
-  
-}
-
-@font-face {
-  font-family: 'Reckless Neue';
-  src: url('/fonts/RecklessNeue/RecklessNeue-Light.ttf') format('truetype'); /* Correct format for .ttf */
-  font-weight: 300; /* Light weight */
-  font-style: normal;
-}
 
 /* Global Reset */
 * {
