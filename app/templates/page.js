@@ -1,11 +1,11 @@
 "use client"
 import Footer from '@/components/HomePage/Footer'
 import Navbar from '@/components/HomePage/Navbar'
-import FilterSection from '@/components/TemplatePage/FilterSection'
-import TemplateSection from '@/components/TemplatePage/TemplateSection'
+import FilterSection from '@/components/AllTemplatesPage/FilterSection'
+import TemplateSection from '@/components/AllTemplatesPage/TemplateSection'
 import React from 'react'
 
-export default function TemplatesPage() {
+export default function AllTemplatesPage() {
   return (
     <div>
       <Navbar />

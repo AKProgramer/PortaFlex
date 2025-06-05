@@ -1,16 +1,29 @@
-import React from 'react'
+"use client"
+import React, { useEffect, useState } from 'react';
+import usePortfolioStore from '@/store/usePortfolioStore';
+import FullPageLoader from '@/components/Loader/FullPageLoader';
+import ViewTemplate from '@/components/TemplateIFramePage/ViewTemplate';
 
-export default function SpecficTemplatePage() {
+export default function TemplateIFramePage({ params }) {
+  const { id } = params;
+  const { portfolios, fetchPortfolios, loading } = usePortfolioStore();
+  const [vercelLink, setVercelLink] = useState(null);
+
+  useEffect(() => {
+    fetchPortfolios();
+  }, [fetchPortfolios]);
+
+  useEffect(() => {
+    if (portfolios && portfolios.length > 0) {
+      const found = portfolios.find((t) => t._id === id);
+      setVercelLink(found?.vercelDeploymentLink || null);
+    }
+  }, [portfolios, id]);
+
+  if (loading) return <FullPageLoader/>;
+  if (!vercelLink) return <div>Template not found or no deployment link.</div>;
+
   return (
-    <div style={{ width: '100%', height: '100%' }}>
-      <iframe
-        src="https://www.wikipedia.org"
-        title="Wikipedia"
-        width="100%"
-        height="100%"
-        style={{ border: 'none', display: 'block' }}
-        allowFullScreen
-      />
-    </div>
-  )
+    <ViewTemplate vercelLink={vercelLink}/>
+  );
 }
