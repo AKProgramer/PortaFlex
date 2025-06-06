@@ -24,7 +24,7 @@ export default function FilterSection() {
             <div className="relative">
               <button
                 onClick={toggleDropdown}
-                className="w-full px-4 py-2 mt-6 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent text-left flex justify-between items-center"
+                className="w-full px-4 py-2 mt-6 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-black text-left flex justify-between items-center"
               >
                 <span>{selectedOption}</span>
                 <svg

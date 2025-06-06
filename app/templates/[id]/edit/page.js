@@ -5,7 +5,13 @@ import { useParams } from "next/navigation";
 import usePortfolioStore from "@/store/usePortfolioStore";
 import FullPageLoader from "@/components/Loader/FullPageLoader";
 import ViewTemplate from "@/components/TemplateIFramePage/ViewTemplate";
-
+import EditNavbar from "@/components/EditTemplatePage/Forms/Navbar";
+import Projects from "@/components/EditTemplatePage/Forms/Projects";
+import Contact from "@/components/EditTemplatePage/Forms/Contact";
+import Skills from "@/components/EditTemplatePage/Forms/Skills";
+import Services from "@/components/EditTemplatePage/Forms/Services";
+import Hero from "@/components/EditTemplatePage/Forms/Hero"
+import Education from "@/components/EditTemplatePage/Forms/Education";
 export default function EditSingleTemplatePage() {
   const params = useParams();
   const { portfolio, fetchPortfolioById, loading } = usePortfolioStore();
@@ -23,14 +29,18 @@ export default function EditSingleTemplatePage() {
     return <FullPageLoader/>
   }
   return (
-    <div className="min-h-screen">
+    <div className="h-screen flex flex-col pt-24">
       {/* Navbar */}
       <Navbar />
       {/* Stepper */}
-      <div className="py-10 w-full flex items-center justify-center">
-        <div className="w-3/5 flex justify-between items-center mb-12">
+      <div className="w-full flex items-center justify-center pb-6 pt-12">
+        <div
+          className="flex justify-between items-center"
+          style={{ width: `${Math.max(320, sections.length * 170)}px`, transition: 'width 0.3s' }}
+        >
           {sections.map((section, index) => {
             const isActive = index === activeStep;
+            const isCompleted = index < activeStep;
             return (
               <div
                 key={section.type || section}
@@ -39,7 +49,7 @@ export default function EditSingleTemplatePage() {
                 {/* Connector line */}
                 {index !== 0 && (
                   <div
-                    className={`absolute mt-5 left-0 w-full border-t-2 border-gray-400 -translate-y-1/2 z-0`}
+                    className={`absolute mt-5 left-0 w-full border-t-[1px] border-black -translate-y-1/2 z-0`}
                     style={{ width: "100%", left: "-50%" }}
                   />
                 )}
@@ -47,9 +57,9 @@ export default function EditSingleTemplatePage() {
                 <div
                   className={`z-10 flex items-center justify-center rounded-full w-11 h-11 text-sm font-bold
                     ${
-                      isActive
+                      isActive || isCompleted
                         ? "bg-black text-white"
-                        : "bg-white border-2 border-gray-400 text-black"
+                        : "bg-white border-[1px] border-black text-black"
                     }`}
                 >
                   {index + 1}
@@ -57,7 +67,7 @@ export default function EditSingleTemplatePage() {
                 {/* Label */}
                 <div
                   className={`mt-2 text-center text-sm ${
-                    isActive ? "font-bold text-black" : "text-gray-600"
+                    isActive || isCompleted ? "font-bold text-black" : "text-black"
                   }`}
                 >
                   {(section.type ? section.type.charAt(0).toUpperCase() + section.type.slice(1) : section)}
@@ -68,47 +78,39 @@ export default function EditSingleTemplatePage() {
         </div>
       </div>
       {/* Content below stepper */}
-      <div className="px-20 h-1/2 flex gap-16">
-        {/* Left side content (commented out, will show its own file/component) */}
-        {/* {false && (
-          <div className="flex-2">
-            <h2 className="text-2xl font-semibold mb-2">
-              What options would you like to include in Navbar?
-            </h2>
-            <p className="text-gray-500 mb-8">
-              Include essential sections in your Navbar based on your needs.
-              <br /> You can customize these options anytime to best fit your
-              website.
-            </p>
-            {/* Option buttons */}
-            {/* <div className="space-y-4">
-              {['Projects', 'Contact', 'Skills', 'Services'].map((item) => (
-                <div key={item} className="flex items-center gap-5">
-                  <button className="border border-black rounded-lg w-36 h-9">{item}</button>
-                  <span className="text-black text-lg">✎</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}  */}
-
+      <div className="flex-grow px-20 flex gap-16 overflow-hidden ">
         {/* Show a placeholder for the section's file/component */}
-        <div className="basis-1/2">
-          {/* TODO: Replace with dynamic import or render of the section's file/component */}
+        <div className="basis-1/2 h-full">
+          {/* Dynamically render the section's file/component */}
           <div className="border border-dashed border-gray-400 rounded-lg p-8 text-center text-gray-500">
-            <span>
-              This area will render the file/component for section: <b>{sections[activeStep]?.type || sections[activeStep]}</b>
-              <br />
-              {/* File: Section_{sections[activeStep]?.type || sections[activeStep] || 'Unknown'}.js */}
-            </span>
+            {(() => {
+              const sectionType = (sections[activeStep]?.type || sections[activeStep] || '').toLowerCase();
+              const sectionMap = {
+                navbar: EditNavbar,
+                projects: Projects,
+                contact: Contact,
+                skills: Skills,
+                services: Services,
+                hero: Hero,
+                education: Education,
+              };
+              const SectionComponent = sectionMap[sectionType];
+              return SectionComponent ? <SectionComponent /> : (
+                <span>
+                  No found <b>{sections[activeStep]?.type || sections[activeStep]}</b>
+                </span>
+              );
+            })()}
           </div>
         </div>
 
         {/* Right side preview placeholder */}
-        <div className="basis-1/2 flex flex-col items-center justify-center h-full">
-          <ViewTemplate vercelLink={portfolio?.vercelDeploymentLink || ""}/>
+        <div className="basis-1/2 flex flex-col items-end">
+         <div className="h-full w-full">
+            <ViewTemplate vercelLink={portfolio?.vercelDeploymentLink} />
+         </div>
           {/* Buttons */}
-          <div className="flex justify-end gap-4 px-10 mt-10">
+          <div className="flex gap-10 p-3">
             <button className="border border-black rounded-lg w-32 h-9">
               Preview
             </button>

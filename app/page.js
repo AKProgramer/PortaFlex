@@ -1,8 +1,9 @@
 import Navbar from "@/components/HomePage/Navbar";
 import Footer from "@/components/HomePage/Footer";
+import Link from "next/link";
 export default function Home() {
   return (
-    <div>
+    <div className="pt-20">
       <Navbar />
       <main>
         {/* Hero Section */}
@@ -19,9 +20,12 @@ export default function Home() {
             professional
             <br /> online portfolio in minutes. With no coding required.
           </p>
-          <button className="bg-secondary text-white px-10 md:px-20 py-2 rounded-xl tracking-widest  font-neueMontreal font-bold">
+          <Link
+            href="/templates"
+            className="bg-secondary text-white px-10 md:px-20 py-2 rounded-xl tracking-widest font-neueMontreal font-bold hover:underline"
+          >
             Get Started
-          </button>
+          </Link>
         </section>
 
         {/* Image Section */}

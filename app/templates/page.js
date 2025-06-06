@@ -7,7 +7,7 @@ import React from 'react'
 
 export default function AllTemplatesPage() {
   return (
-    <div>
+    <div className='pt-20'>
       <Navbar />
       <FilterSection/>
       <TemplateSection/>
