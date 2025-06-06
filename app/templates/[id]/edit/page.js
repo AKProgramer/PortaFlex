@@ -33,7 +33,17 @@ export default function EditSingleTemplatePage() {
       {/* Navbar */}
       <Navbar />
       {/* Stepper */}
-      <div className="w-full flex items-center justify-center pb-6 pt-12">
+      <div className="relative w-full flex items-center justify-center pb-6 pt-12">
+        <button
+          className="absolute top-4 left-32 underline text-[#1F35DA]"
+          onClick={() => {
+            if (activeStep > 0) setActiveStep((prev) => prev - 1);
+          }}
+          disabled={activeStep === 0}
+          style={{ opacity: activeStep === 0 ? 0.5 : 1, cursor: activeStep === 0 ? 'not-allowed' : 'pointer' }}
+        >
+          Go Back
+        </button>
         <div
           className="flex justify-between items-center"
           style={{ width: `${Math.max(320, sections.length * 170)}px`, transition: 'width 0.3s' }}
