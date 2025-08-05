@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { Plus, X, Edit, Trash2, Calendar, GraduationCap, Building, Clock, ChevronDown } from "lucide-react";
+import React, { useState } from 'react';
+import { Plus, X, Edit, Trash2, Calendar, Briefcase, Building, Clock, ChevronDown } from 'lucide-react';
 
-// Custom Modern Dropdown Component
+// Custom Modern Dropdown Component (like LinkedIn, Notion, Figma)
 const MonthYearPicker = ({ value, onChange, options, placeholder }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
@@ -102,16 +102,16 @@ const MonthYearPicker = ({ value, onChange, options, placeholder }) => {
   );
 };
 
-export default function Education() {
-  const [educations, setEducations] = useState([]);
-  const [currentEducation, setCurrentEducation] = useState({
-    school: '',
-    degree: '',
+export default function Experience() {
+  const [experiences, setExperiences] = useState([]);
+  const [currentExperience, setCurrentExperience] = useState({
+    role: '',
+    company: '',
     startMonth: '',
     startYear: '',
     endMonth: '',
     endYear: '',
-    isCurrentStudy: false
+    isCurrentRole: false
   });
 
   const months = [
@@ -122,73 +122,73 @@ export default function Education() {
   const currentYear = new Date().getFullYear();
   const years = Array.from({ length: 50 }, (_, i) => currentYear - i);
 
-  const addEducation = () => {
-    if (currentEducation.school.trim() && currentEducation.degree.trim()) {
-      setEducations([...educations, { ...currentEducation, id: Date.now() }]);
-      setCurrentEducation({
-        school: '',
-        degree: '',
+  const addExperience = () => {
+    if (currentExperience.role.trim() && currentExperience.company.trim()) {
+      setExperiences([...experiences, { ...currentExperience, id: Date.now() }]);
+      setCurrentExperience({
+        role: '',
+        company: '',
         startMonth: '',
         startYear: '',
         endMonth: '',
         endYear: '',
-        isCurrentStudy: false
+        isCurrentRole: false
       });
     }
   };
 
-  const removeEducation = (id) => {
-    setEducations(educations.filter(edu => edu.id !== id));
+  const removeExperience = (id) => {
+    setExperiences(experiences.filter(exp => exp.id !== id));
   };
 
-  const updateCurrentEducation = (field, value) => {
-    setCurrentEducation(prev => ({ ...prev, [field]: value }));
+  const updateCurrentExperience = (field, value) => {
+    setCurrentExperience(prev => ({ ...prev, [field]: value }));
   };
 
-  const editEducation = (education) => {
-    setCurrentEducation(education);
-    removeEducation(education.id);
+  const editExperience = (experience) => {
+    setCurrentExperience(experience);
+    removeExperience(experience.id);
   };
 
-  const toggleCurrentStudy = () => {
-    setCurrentEducation(prev => ({
+  const toggleCurrentRole = () => {
+    setCurrentExperience(prev => ({
       ...prev,
-      isCurrentStudy: !prev.isCurrentStudy,
-      endMonth: !prev.isCurrentStudy ? '' : prev.endMonth,
-      endYear: !prev.isCurrentStudy ? '' : prev.endYear
+      isCurrentRole: !prev.isCurrentRole,
+      endMonth: !prev.isCurrentRole ? '' : prev.endMonth,
+      endYear: !prev.isCurrentRole ? '' : prev.endYear
     }));
   };
 
   return (
     <div className="max-w-4xl mx-auto p-6">
       <div className="flex items-center mb-6">
-        <GraduationCap className="w-5 h-5 text-black mr-2" />
-        <h2 className="text-xl font-semibold text-black">Education</h2>
+        <Briefcase className="w-5 h-5 text-black mr-2" />
+        <h2 className="text-xl font-semibold text-black">Professional Experience</h2>
       </div>
       
-      {/* Add Education Form */}
+      {/* Add Experience Form */}
       <div className="mb-10">
         <div className="grid grid-cols-1 gap-6 mb-6">
-          {/* School/University */}
+          {/* Role */}
           <div className="md:col-span-1">
-            <label className="block text-sm font-medium text-black mb-2">School/University *</label>
+            <label className="block text-sm font-medium text-black mb-2">Job Title / Role *</label>
             <input
               type="text"
-              value={currentEducation.school}
-              onChange={(e) => updateCurrentEducation('school', e.target.value)}
-              placeholder="e.g. Harvard University, MIT"
+              value={currentExperience.role}
+              onChange={(e) => updateCurrentExperience('role', e.target.value)}
+              placeholder="e.g. Senior Software Engineer"
               className="w-full px-4 py-3 border-2 border-black rounded-xl focus:border-gray-600 focus:ring-4 focus:ring-gray-200 transition-all duration-300 outline-none"
             />
           </div>
 
-          {/* Degree */}
+          {/* Company */}
           <div className="md:col-span-1">
-            <label className="block text-sm font-medium text-black mb-2">Degree *</label>
+            <label className="block text-sm font-medium text-black mb-2">Company *</label>
             <input
               type="text"
-              value={currentEducation.degree}
-              onChange={(e) => updateCurrentEducation('degree', e.target.value)}
-              placeholder="e.g. Bachelor of Computer Science, MBA"
+              value={currentExperience.company}
+              onChange={(e) => updateCurrentExperience('company', e.target.value)}
+              placeholder="e.g. Google, Microsoft, Startup Inc."
               className="w-full px-4 py-3 border-2 border-black rounded-xl focus:border-gray-600 focus:ring-4 focus:ring-gray-200 transition-all duration-300 outline-none"
             />
           </div>
@@ -200,14 +200,14 @@ export default function Education() {
             <label className="block text-sm font-medium text-black mb-2">Start Date</label>
             <div className="grid grid-cols-2 gap-3">
               <MonthYearPicker
-                value={currentEducation.startMonth}
-                onChange={(value) => updateCurrentEducation('startMonth', value)}
+                value={currentExperience.startMonth}
+                onChange={(value) => updateCurrentExperience('startMonth', value)}
                 options={months}
                 placeholder="Month"
               />
               <MonthYearPicker
-                value={currentEducation.startYear}
-                onChange={(value) => updateCurrentEducation('startYear', value)}
+                value={currentExperience.startYear}
+                onChange={(value) => updateCurrentExperience('startYear', value)}
                 options={years}
                 placeholder="Year"
               />
@@ -218,40 +218,40 @@ export default function Education() {
           <div className="md:col-span-1">
             <label className="block text-sm font-medium text-black mb-2">End Date</label>
             
-            {/* Current Study Toggle */}
+            {/* Current Role Toggle */}
             <div className="mb-3">
               <label className="flex items-center gap-2 cursor-pointer">
                 <input
                   type="checkbox"
-                  checked={currentEducation.isCurrentStudy}
-                  onChange={toggleCurrentStudy}
+                  checked={currentExperience.isCurrentRole}
+                  onChange={toggleCurrentRole}
                   className="w-4 h-4 text-black border-gray-300 rounded focus:ring-black focus:ring-2"
                 />
                 <span className="text-sm text-black flex items-center gap-1">
                   <Clock size={14} className="text-gray-500" />
-                  I am currently studying here
+                  I am currently working in this role
                 </span>
               </label>
             </div>
 
-            {!currentEducation.isCurrentStudy && (
+            {!currentExperience.isCurrentRole && (
               <div className="grid grid-cols-2 gap-3">
                 <MonthYearPicker
-                  value={currentEducation.endMonth}
-                  onChange={(value) => updateCurrentEducation('endMonth', value)}
+                  value={currentExperience.endMonth}
+                  onChange={(value) => updateCurrentExperience('endMonth', value)}
                   options={months}
                   placeholder="Month"
                 />
                 <MonthYearPicker
-                  value={currentEducation.endYear}
-                  onChange={(value) => updateCurrentEducation('endYear', value)}
+                  value={currentExperience.endYear}
+                  onChange={(value) => updateCurrentExperience('endYear', value)}
                   options={years}
                   placeholder="Year"
                 />
               </div>
             )}
 
-            {currentEducation.isCurrentStudy && (
+            {currentExperience.isCurrentRole && (
               <div className="px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-600 flex items-center gap-2">
                 <Clock size={14} className="text-gray-500" />
                 Present
@@ -261,38 +261,35 @@ export default function Education() {
         </div>
         
         <button 
-          onClick={addEducation}
+          onClick={addExperience}
           className="bg-black text-white px-6 py-3 rounded-xl font-medium hover:bg-gray-800 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-          disabled={!currentEducation.school.trim() || !currentEducation.degree.trim()}
+          disabled={!currentExperience.role.trim() || !currentExperience.company.trim()}
         >
-          Add Education
+          Add Experience
         </button>
       </div>
 
-      {/* Education List */}
-      {educations.length > 0 && (
+      {/* Experiences List */}
+      {experiences.length > 0 && (
         <div>
-          <h3 className="text-lg font-semibold mb-6 text-black">Your Education ({educations.length})</h3>
+          <h3 className="text-lg font-semibold mb-6 text-black">Your Experience ({experiences.length})</h3>
           <div className="space-y-6">
-            {educations.map((education) => (
-              <div key={education.id} className="border-2 border-black rounded-xl p-6">
+            {experiences.map((experience) => (
+              <div key={experience.id} className="border-2 border-black rounded-xl p-6">
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    <h4 className="text-lg font-semibold text-black">{education.degree}</h4>
-                    <p className="text-sm text-gray-600 flex items-center gap-1">
-                      <Building size={14} className="text-gray-500" />
-                      {education.school}
-                    </p>
+                    <h4 className="text-lg font-semibold text-black">{experience.role}</h4>
+                    <p className="text-sm text-gray-600">{experience.company}</p>
                   </div>
                   <div className="flex gap-2">
                     <button
-                      onClick={() => editEducation(education)}
+                      onClick={() => editExperience(experience)}
                       className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
                     >
                       <Edit className="w-4 h-4 text-black" />
                     </button>
                     <button
-                      onClick={() => removeEducation(education.id)}
+                      onClick={() => removeExperience(experience.id)}
                       className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
                     >
                       <Trash2 className="w-4 h-4 text-black" />
@@ -300,17 +297,17 @@ export default function Education() {
                   </div>
                 </div>
                 
-                {(education.startMonth && education.startYear) || education.isCurrentStudy && (
+                {(experience.startMonth && experience.startYear) || experience.isCurrentRole && (
                   <div className="mb-4">
                     <span className="text-sm font-medium text-gray-600">Duration: </span>
                     <span className="text-sm text-black">
-                      {education.startMonth && education.startYear ? 
-                        `${education.startMonth} ${education.startYear}` : 'Start date not set'
+                      {experience.startMonth && experience.startYear ? 
+                        `${experience.startMonth} ${experience.startYear}` : 'Start date not set'
                       } - {' '}
-                      {education.isCurrentStudy 
+                      {experience.isCurrentRole 
                         ? 'Present' 
-                        : (education.endMonth && education.endYear 
-                            ? `${education.endMonth} ${education.endYear}` 
+                        : (experience.endMonth && experience.endYear 
+                            ? `${experience.endMonth} ${experience.endYear}` 
                             : 'End date not set'
                           )
                       }
@@ -323,10 +320,10 @@ export default function Education() {
         </div>
       )}
       
-      {educations.length === 0 && (
+      {experiences.length === 0 && (
         <div className="text-center py-12 border-2 border-dashed border-gray-300 rounded-xl">
-          <GraduationCap className="mx-auto h-12 w-12 text-gray-400 mb-4" />
-          <p className="text-gray-500">No education added yet. Add your first education above!</p>
+          <Briefcase className="mx-auto h-12 w-12 text-gray-400 mb-4" />
+          <p className="text-gray-500">No experience added yet. Add your first experience above!</p>
         </div>
       )}
     </div>

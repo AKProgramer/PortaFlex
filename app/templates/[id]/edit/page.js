@@ -11,7 +11,11 @@ import Contact from "@/components/EditTemplatePage/Forms/Contact";
 import Skills from "@/components/EditTemplatePage/Forms/Skills";
 import Services from "@/components/EditTemplatePage/Forms/Services";
 import Hero from "@/components/EditTemplatePage/Forms/Hero"
+import About from "@/components/EditTemplatePage/About";
 import Education from "@/components/EditTemplatePage/Forms/Education";
+import Experience from "@/components/EditTemplatePage/Forms/Experience";
+
+
 export default function EditSingleTemplatePage() {
   const params = useParams();
   const { portfolio, fetchPortfolioById, loading } = usePortfolioStore();
@@ -88,11 +92,11 @@ export default function EditSingleTemplatePage() {
         </div>
       </div>
       {/* Content below stepper */}
-      <div className="flex-grow px-20 flex gap-16 overflow-hidden ">
+      <div className="flex-1 flex px-10 gap-16 pb-6 min-h-0">
         {/* Show a placeholder for the section's file/component */}
-        <div className="basis-1/2 h-full">
+        <div className="basis-1/2 overflow-y-auto">
           {/* Dynamically render the section's file/component */}
-          <div className="border border-dashed border-gray-400 rounded-lg p-8 text-center text-gray-500">
+          <div className="border border-black rounded-lg">
             {(() => {
               const sectionType = (sections[activeStep]?.type || sections[activeStep] || '').toLowerCase();
               const sectionMap = {
@@ -102,7 +106,9 @@ export default function EditSingleTemplatePage() {
                 skills: Skills,
                 services: Services,
                 hero: Hero,
+                about: About,
                 education: Education,
+                experience: Experience
               };
               const SectionComponent = sectionMap[sectionType];
               return SectionComponent ? <SectionComponent /> : (
@@ -115,16 +121,17 @@ export default function EditSingleTemplatePage() {
         </div>
 
         {/* Right side preview placeholder */}
-        <div className="basis-1/2 flex flex-col items-end">
-         <div className="h-full w-full">
-            <ViewTemplate vercelLink={portfolio?.vercelDeploymentLink} />
-         </div>
+        <div className="basis-1/2 flex flex-col">
+          <div className="flex-1 overflow-y-auto">
+              <ViewTemplate vercelLink={portfolio?.vercelDeploymentLink} />
+          </div>
+    
           {/* Buttons */}
-          <div className="flex gap-10 p-3">
-            <button className="border border-black rounded-lg w-32 h-9">
+          <div className="flex gap-6 p-3 flex-shrink-0 justify-end">
+            <button className="border border-black rounded-lg w-40 h-12 text-lg font-medium hover:bg-gray-100 transition-colors">
               Preview
             </button>
-            <button className="bg-black text-white rounded-lg w-32 h-9" onClick={() => setActiveStep((prev) => (prev + 1 < sections.length ? prev + 1 : prev))}>
+            <button className="bg-black text-white rounded-lg w-40 h-12 text-lg font-medium hover:bg-black transition-colors" onClick={() => setActiveStep((prev) => (prev + 1 < sections.length ? prev + 1 : prev))}>
               Next
             </button>
           </div>
